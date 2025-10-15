@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Office 365 Failed Login Attempt",
+    "description": "Detects multiple failed login attempts from the same user within a short time period, potentially indicating a brute force attack.",
+    "coolOffPeriod": "10 minutes",
+    "query": "dataSource.vendor='Microsoft' AND event.type='UserLoginFailed'"
+  },
+  {
+    "title": "Download of an .RDP file on Sharepoint",
+    "description": "Detects instances where .rdp files are accessed, downloaded, or copied from SharePoint",
+    "coolOffPeriod": "15 minutes",
+    "query": "dataSource.name = 'Microsoft O365' and unmapped.Operation in ('FileDownloaded', 'FileSyncDownloadedFull', 'FileDownloadedFromBrowser', 'FileModifiedExtended', 'FileAccessed', 'FileCopiedToNetworkShare', 'FileCreatedOnRemovableMedia', 'FileCopied') and unmapped.SourceFileExtension = 'rdp'"
+  }
+]
