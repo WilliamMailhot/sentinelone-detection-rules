@@ -1,9 +1,9 @@
 [
   {
-    "title": "Office 365 Failed Login Attempt",
-    "description": "Detects multiple failed login attempts from the same user within a short time period, potentially indicating a brute force attack.",
-    "coolOffPeriod": 10,
-    "query": "dataSource.vendor='Microsoft' AND event.type='UserLoginFailed'"
+    "title": "Office 365 New Mailbox Forwarding Rule",
+    "description": "Detects the creation of inbox rules that forward messages in Office 365. Mailbox forwarding can be exploited by attackers to redirect sensitive emails to external addresses, enabling data exfiltration or intelligence gathering.",
+    "coolOffPeriod": 15,
+    "query": " dataSource.name = 'Microsoft O365' and metadata.product.name = 'Exchange' and ((activity_name in ('New-InboxRule', 'Set-InboxRule', 'Set-Mailbox') and unmapped.Parameters matches '"Name":\\s*"DeliverToMailboxAndForward"') or (activity_name = 'UpdateInboxRules' and unmapped.OperationProperties contains 'Forward' and unmapped.OperationProperties contains 'Recipients')) and unmapped.ResultStatus in ('Succeeded', 'True')"
   },
   {
     "title": "Download of an .RDP file on Sharepoint",
