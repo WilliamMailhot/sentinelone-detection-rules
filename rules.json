@@ -1,8 +1,8 @@
 [
   {
-    "title": "Download of an .RDP file on Sharepoint",
-    "description": "Detects instances where .rdp files are accessed, downloaded, or copied from SharePoint",
-    "coolOffPeriod": 15,
-    "query": "dataSource.name = 'Microsoft O365' and unmapped.Operation in ('FileDownloaded', 'FileSyncDownloadedFull', 'FileDownloadedFromBrowser', 'FileModifiedExtended', 'FileAccessed', 'FileCopiedToNetworkShare', 'FileCreatedOnRemovableMedia', 'FileCopied') and unmapped.SourceFileExtension = 'rdp'"
+    "title": "Office 365 New Mailbox Forwarding Rule",
+    "description": "Detects the creation of inbox rules that forward messages in Office 365. Mailbox forwarding can be exploited by attackers to redirect sensitive emails to external addresses, enabling data exfiltration or intelligence gathering. By forwarding specific communications, such as financial or executive emails, attackers can gain access to valuable information without the victim's knowledge. This tactic is commonly used in Business Email Compromise (BEC) and other targeted attacks.",
+    "coolOffPeriod": 0,
+    "query": "dataSource.name='Microsoft O365' metadata.product.name='Exchange' unmapped.Operation='New-InboxRule' unmapped.Parameters contains 'Forward'"
   }
 ]
